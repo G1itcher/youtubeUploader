@@ -1,0 +1,24 @@
+{
+  "name": "youtube-uploader",
+  "version": "1.0.0",
+  "description": "Youtube Uploader",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.14.0",
+    "pug": "^2.0.0-beta6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/G1itcher/youtubeUploader.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/G1itcher/youtubeUploader/issues"
+  },
+  "homepage": "https://github.com/G1itcher/youtubeUploader#readme"
+}
