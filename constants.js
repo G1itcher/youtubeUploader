@@ -1,5 +1,5 @@
 var project_constants = {
-    UPLOAD_PATH: "./uploads/"
+    UPLOAD_PATH: "/media/uploads/"
 };
 
 module.exports = project_constants;
