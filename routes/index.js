@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
 router.post("/", function (req, res, next) {
   //Delete Old files, not the ones just passed in
   fs.readdir(uploadPath, function (err, files) {
-    var toDelete = files.filter(f => !req.files.some(rf => rf.filename == name))
+    var toDelete = files.filter(f => !req.files.some(rf => rf.filename == f))
     if (toDelete && toDelete.length)
     {
       files.forEach(function(file){
@@ -26,7 +26,7 @@ router.post("/", function (req, res, next) {
 
   for(var i = 0; i < titles.length; i++)
   {
-    child_process.exec(`youtube-upload --title ${titles[i]} ${req.files.filename}`, {cwd:uploadPath});
+    child_process.exec(`youtube-upload --title ${titles[i]} ${req.files.filename} --privacy private`, {cwd:uploadPath});
   }
 
   res.send("");
