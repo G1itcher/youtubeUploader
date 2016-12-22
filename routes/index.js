@@ -16,20 +16,25 @@ router.post("/", function (req, res, next) {
     var toDelete = files.filter(f => !req.files.some(rf => rf.filename == f))
     if (toDelete && toDelete.length)
     {
-      files.forEach(function(file){
+      toDelete.forEach(function(file){
           fs.unlinkSync(`${uploadPath}${file}`);
       });
     }
+
+    var titles = Array.isArray(req.body.title)? req.body.title : [req.body.title];
+
+    for(var i = 0; i < titles.length; i++)
+    {
+      child_process.exec(`youtube-upload --title ${titles[i]} ${req.files.filename} --privacy private`, {cwd:uploadPath},
+      function(err, stdout, stderr){
+        console.log(err);
+        console.log(stdout);
+        console.log(stderr);
+      });
+    }
+
+    res.send("");
   });
-
-  var titles = [...req.body.title]
-
-  for(var i = 0; i < titles.length; i++)
-  {
-    child_process.exec(`youtube-upload --title ${titles[i]} ${req.files.filename} --privacy private`, {cwd:uploadPath});
-  }
-
-  res.send("");
 });
 
 module.exports = router;
