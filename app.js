@@ -4,12 +4,14 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var busboy = require("connect-busboy");
+var multer = require("multer");
 
 var index = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+
+var uploadPath = require("./constants.js").UPLOAD_PATH;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -20,9 +22,9 @@ app.set('view engine', 'jade');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(busboy({immediate:true}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(multer({ dest: uploadPath}).any());
 
 app.use('/', index);
 app.use('/users', users);
@@ -43,18 +45,6 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
-});
-
-app.use(function(req, res) {
-  if (req.busboy) {
-    req.busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
-      // ...
-    });
-    req.busboy.on('field', function(key, value, keyTruncated, valueTruncated) {
-      // ...
-    });
-  }
-  // etc ...
 });
 
 module.exports = app;
