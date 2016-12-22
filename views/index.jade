@@ -3,5 +3,8 @@ extends layout
 block content
   form(method="post", enctype="multipart/form-data")
     h1 Youtube Uploader
-    input(type="file", name="filename")
+    label(for="titleBox") Title
+    input(id="titleBox" type="text", name="title", style="display:block;")
+    label(for="fileBox") Please select your video
+    input(id="fileBox", type="file", name="filename", style="display:block;")
     input(type="submit", name="upload_btn", value="upload")
