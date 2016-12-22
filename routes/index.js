@@ -25,7 +25,7 @@ router.post("/", function (req, res, next) {
 
     for(var i = 0; i < titles.length; i++)
     {
-      child_process.exec(`youtube-upload --title ${titles[i]} ${req.files.filename} --privacy private`, {cwd:uploadPath},
+      child_process.exec(`youtube-upload --title ${titles[i]} ${req.files[i].filename} --privacy private`, {cwd:uploadPath},
       function(err, stdout, stderr){
         console.log(err);
         console.log(stdout);
