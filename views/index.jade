@@ -5,7 +5,7 @@ block content
   form(id="fileForm", method="post", enctype="multipart/form-data")
     h1 Youtube Uploader
     label(for="fileBox") Please select your videos
-    input(id="fileBox", type="file", name="filename", class="file-loading")
+    input(id="fileBox", type="file", name="filename", class="file-loading", multiple)
 
   script.
     $("#fileBox").fileinput({
