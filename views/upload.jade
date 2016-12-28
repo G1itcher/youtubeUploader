@@ -1,0 +1,67 @@
+extends layout
+
+block content
+  div(class="container")
+  form(id="fileForm", method="post", enctype="multipart/form-data")
+    h1 Youtube Uploader
+    label(for="fileBox") Please select your videos
+    input(id="fileBox", type="file", name="filename", class="file-loading", multiple)
+
+  script.
+    $("#fileBox").fileinput({
+      uploadUrl: "/",
+      uploadAsync: true
+    }).on("fileuploaded", function(e, data, id, index){
+      //Trigger the ajax checking of the newly uploaded file
+      var name = data.files[index].name;
+      var uuid = data.response.uuid;
+      
+    });
+
+    function getYTUploadProgress(uuid){
+      $.ajax({
+        method:"GET",
+        url:`/uploadstatus/${uuid}`,
+        success: function(e){
+          //grab the progress bar and update percentage.
+          //Maybe try and scrape the outputURL from the app also for the final return data
+        }
+      })
+    }
+
+    /*
+    $("#fileForm").submit(function(e){
+      var formData = new FormData(this);
+
+      $.ajax({
+        type:"POST",
+        url:".",
+        data:formData,
+        xhr: function(){
+          var myXhr = $.ajaxSettings.xhr();
+          if(myXhr.upload){
+            myXhr.upload.addEventListener("progress", progressListener, false);
+          }
+          return myXhr;
+        },
+        cache:false,
+        contentType:false,
+        processData:false,
+        success: function(data){
+          console.log(`Success! Data: ${data}`);
+        },
+        error: function(data){
+          console.log(`Error! Data: ${data}`);
+        }
+      });
+      e.preventDefault();
+    });
+
+    function progressListener(e){
+      if(e.lengthComputable){
+        var percentage = (e.loaded * 100) / e.total;
+        console.log(percentage);
+      }
+    }
+    */
+

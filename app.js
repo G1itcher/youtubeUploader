@@ -6,13 +6,17 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var multer = require("multer");
 var session = require("express-session");
-
-var index = require('./routes/index');
-var users = require('./routes/users');
+var configDB = require("./config/database");
+var port = process.env.port || 8080;
+var mongoose = require("mongoose");
+var flash = require("connect-flash");
+var passport = require("passport");
 
 var app = express();
 
 var uploadPath = require("./constants.js").UPLOAD_PATH;
+
+mongoose.connect(configDB.url);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -32,6 +36,13 @@ app.use(session({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(multer({ dest: uploadPath}).any());
+app.use(passport.initialize());
+app.use(passport.session());
+
+require("./config/passport")(passport);
+
+var index = require('./routes/index')(passport);
+var users = require('./routes/users');
 
 app.use('/', index);
 app.use('/users', users);
