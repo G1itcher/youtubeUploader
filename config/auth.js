@@ -4,8 +4,8 @@
 
 module.exports = {
     googleAuth: {
-        clientID:"419668244324-6hcdhbp8g0jrpmottjju4kceamo2b7ed.apps.googleusercontent.com",
-        clientSecret:"b4_h2TiQp3IkTSq1BxawOTD7",
+        clientID:"419668244324-53e1nfp4vrmb6uiudn4bdind9chgjk4j.apps.googleusercontent.com",
+        clientSecret:"33rAbIflnARjrQtKuHYP3nPP",
         callbackUrl:"http://localhost:3000/auth/google/callback"
     }
 };

@@ -41,7 +41,7 @@ app.use(passport.session());
 
 require("./config/passport")(passport);
 
-var index = require('./routes/index')(passport);
+var index = require('./routes/index');
 var users = require('./routes/users');
 
 app.use('/', index);
